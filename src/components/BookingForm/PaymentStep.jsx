@@ -15,13 +15,9 @@ export default function PaymentStep() {
   const [cardValue, setCardValue] = useState('');
   const [cvv, setCvv] = useState('');
   const [expiry, setExpiry] = useState('');
-
   const { handleSubmit } = useForm();
 
-  const handleCardInput = (e) => {
-    setCardValue(formatCardDisplay(e.target.value));
-  };
-
+  const handleCardInput = (e) => setCardValue(formatCardDisplay(e.target.value));
   const handleExpiryInput = (e) => {
     let val = e.target.value.replace(/\D/g, '');
     if (val.length >= 2) val = val.slice(0, 2) + '/' + val.slice(2, 4);
@@ -67,17 +63,16 @@ export default function PaymentStep() {
       exit={{ opacity: 0, x: -30 }}
       transition={{ duration: 0.35 }}
     >
-      <h2 className="font-display text-3xl font-semibold mb-2" style={{ color: 'var(--spa-dark)' }}>
+      <h2 className="font-display text-2xl sm:text-3xl font-semibold mb-2" style={{ color: 'var(--spa-dark)' }}>
         Secure Payment
       </h2>
       <p className="text-sm mb-6" style={{ color: 'var(--spa-muted)' }}>
         This is a demo — use any test card below
       </p>
 
-      {/* Test cards hint */}
-      <div className="rounded-2xl p-4 mb-6 text-xs" style={{ background: 'var(--spa-yellow)', border: '1px solid rgba(250,230,124,0.8)' }}>
+      <div className="rounded-2xl p-3 sm:p-4 mb-6 text-xs" style={{ background: 'var(--spa-yellow)', border: '1px solid rgba(250,230,124,0.8)' }}>
         <div className="font-semibold mb-2" style={{ color: 'var(--spa-dark)' }}>🧪 Test Cards</div>
-        <div className="font-mono space-y-1" style={{ color: 'var(--spa-text)' }}>
+        <div className="font-mono space-y-1 text-xs" style={{ color: 'var(--spa-text)' }}>
           <div>4111 1111 1111 1111 (Visa)</div>
           <div>5555 5555 5555 4444 (Mastercard)</div>
           <div>3782 822463 10005 (Amex)</div>
@@ -85,9 +80,8 @@ export default function PaymentStep() {
         <div className="mt-2" style={{ color: 'var(--spa-muted)' }}>Any expiry & CVV works</div>
       </div>
 
-      {/* Booking summary */}
-      <div className="rounded-2xl p-4 mb-6" style={{ background: 'var(--spa-green)' }}>
-        <div className="flex justify-between items-start mb-3">
+      <div className="rounded-2xl p-3 sm:p-4 mb-6" style={{ background: 'var(--spa-green)' }}>
+        <div className="flex justify-between items-start mb-3 flex-wrap gap-2">
           <div>
             <div className="font-semibold" style={{ color: 'var(--spa-dark)' }}>{bookingData.service}</div>
             <div className="text-xs" style={{ color: 'var(--spa-muted)' }}>
@@ -101,12 +95,9 @@ export default function PaymentStep() {
         </div>
       </div>
 
-      {/* Card form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>
-            Card Number
-          </label>
+          <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>Card Number</label>
           <input
             value={cardValue}
             onChange={handleCardInput}
@@ -117,11 +108,9 @@ export default function PaymentStep() {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>
-              Expiry Date
-            </label>
+            <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>Expiry Date</label>
             <input
               value={expiry}
               onChange={handleExpiryInput}
@@ -132,9 +121,7 @@ export default function PaymentStep() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>
-              CVV
-            </label>
+            <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>CVV</label>
             <input
               value={cvv}
               onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 4))}

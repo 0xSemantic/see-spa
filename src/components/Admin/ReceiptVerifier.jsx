@@ -35,21 +35,22 @@ export default function ReceiptVerifier() {
 
   return (
     <div>
-      <h3 className="font-display text-2xl font-semibold mb-1" style={{ color: 'var(--spa-dark)' }}>
+      <h3 className="font-display text-xl sm:text-2xl font-semibold mb-1" style={{ color: 'var(--spa-dark)' }}>
         Receipt Verification
       </h3>
       <p className="text-sm mb-6" style={{ color: 'var(--spa-muted)' }}>
         Enter a guest's receipt code to check them in
       </p>
 
-      <div className="flex gap-3 mb-6">
+      {/* Input + button - stack on mobile */}
+      <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <input
           value={code}
           onChange={(e) => setCode(e.target.value.toUpperCase())}
           onKeyDown={handleKeyDown}
           placeholder="SP-XXXX"
           maxLength={7}
-          className="flex-1 px-4 py-3.5 rounded-xl border text-sm font-mono tracking-widest uppercase"
+          className="w-full sm:flex-1 px-4 py-3.5 rounded-xl border text-sm font-mono tracking-widest uppercase"
           style={{ borderColor: 'rgba(199,233,192,0.8)', background: 'white', letterSpacing: '0.15em' }}
         />
         <motion.button
@@ -71,7 +72,7 @@ export default function ReceiptVerifier() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.97 }}
             transition={{ duration: 0.3 }}
-            className="rounded-2xl p-5"
+            className="rounded-2xl p-4 sm:p-5"
             style={{
               background: result.success ? 'var(--spa-green)' : '#fef2f2',
               border: `1.5px solid ${result.success ? 'var(--spa-primary)' : '#fecaca'}`,
@@ -80,18 +81,18 @@ export default function ReceiptVerifier() {
             <div className="flex items-center gap-3 mb-3">
               <div className="text-2xl">{result.success ? '✅' : result.message.includes('already') ? '🔄' : '❌'}</div>
               <div>
-                <div className="font-semibold" style={{ color: result.success ? 'var(--spa-dark)' : '#dc2626' }}>
+                <div className="font-semibold text-sm sm:text-base" style={{ color: result.success ? 'var(--spa-dark)' : '#dc2626' }}>
                   {result.message}
                 </div>
               </div>
             </div>
 
             {result.booking && (
-              <div className="grid grid-cols-2 gap-3 mt-4 pt-4"
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 pt-4"
                 style={{ borderTop: `1px solid ${result.success ? 'rgba(199,233,192,0.6)' : '#fecaca'}` }}>
                 <div>
                   <div className="text-xs" style={{ color: 'var(--spa-muted)' }}>Guest</div>
-                  <div className="font-semibold text-sm" style={{ color: 'var(--spa-dark)' }}>
+                  <div className="font-semibold text-sm break-all" style={{ color: 'var(--spa-dark)' }}>
                     {result.booking.customerName}
                   </div>
                 </div>

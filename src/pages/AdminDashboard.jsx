@@ -30,15 +30,15 @@ export default function AdminDashboard() {
   const checkedIn = bookings.filter((b) => b.status === 'checked_in').length;
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between mb-8"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8"
       >
         <div>
-          <h1 className="font-display text-4xl font-semibold" style={{ color: 'var(--spa-dark)' }}>
+          <h1 className="font-display text-3xl sm:text-4xl font-semibold" style={{ color: 'var(--spa-dark)' }}>
             Admin Dashboard
           </h1>
           <p className="text-sm mt-1" style={{ color: 'var(--spa-muted)' }}>
@@ -54,8 +54,8 @@ export default function AdminDashboard() {
         </button>
       </motion.div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      {/* Stats - responsive grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {[
           { label: 'Total Bookings', value: bookings.length, icon: '📋', bg: 'var(--spa-green)' },
           { label: 'Confirmed', value: confirmed, icon: '🕐', bg: 'var(--spa-yellow)' },
@@ -78,7 +78,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-6">
         {[
           { id: 'bookings', label: '📋 All Bookings' },
           { id: 'verify', label: '🎫 Verify Receipt' },
@@ -86,7 +86,7 @@ export default function AdminDashboard() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className="px-5 py-2.5 rounded-xl text-sm font-medium transition-all"
+            className="px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all"
             style={{
               background: activeTab === tab.id ? 'var(--spa-dark)' : 'white',
               color: activeTab === tab.id ? 'white' : 'var(--spa-muted)',
@@ -99,7 +99,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Tab Content */}
-      <div className="rounded-3xl p-6" style={{ background: 'white', border: '1px solid rgba(199,233,192,0.4)' }}>
+      <div className="rounded-3xl p-4 sm:p-6" style={{ background: 'white', border: '1px solid rgba(199,233,192,0.4)' }}>
         {activeTab === 'bookings' ? (
           <BookingTable bookings={bookings} loading={loading} />
         ) : (

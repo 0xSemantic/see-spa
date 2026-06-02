@@ -35,7 +35,7 @@ export default function CustomerStep() {
       exit={{ opacity: 0, x: -30 }}
       transition={{ duration: 0.35 }}
     >
-      <h2 className="font-display text-3xl font-semibold mb-2" style={{ color: 'var(--spa-dark)' }}>
+      <h2 className="font-display text-2xl sm:text-3xl font-semibold mb-2" style={{ color: 'var(--spa-dark)' }}>
         Your Details
       </h2>
       <p className="text-sm mb-6" style={{ color: 'var(--spa-muted)' }}>
@@ -43,11 +43,11 @@ export default function CustomerStep() {
       </p>
 
       {/* Booking Summary */}
-      <div className="rounded-2xl p-4 mb-8" style={{ background: 'var(--spa-green)' }}>
+      <div className="rounded-2xl p-3 sm:p-4 mb-8" style={{ background: 'var(--spa-green)' }}>
         <h3 className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--spa-muted)' }}>
           Booking Summary
         </h3>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-3 sm:gap-4">
           <div>
             <div className="text-xs" style={{ color: 'var(--spa-muted)' }}>Service</div>
             <div className="font-semibold text-sm" style={{ color: 'var(--spa-dark)' }}>{bookingData.service}</div>
@@ -64,27 +64,19 @@ export default function CustomerStep() {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        {/* Name */}
         <div>
-          <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>
-            Full Name
-          </label>
+          <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>Full Name</label>
           <input
             {...register('customerName')}
             placeholder="Jane Doe"
             className="w-full px-4 py-3 rounded-xl border text-sm transition-all"
             style={{ borderColor: errors.customerName ? '#f87171' : 'rgba(199,233,192,0.8)', background: 'white' }}
           />
-          {errors.customerName && (
-            <p className="text-xs mt-1 text-red-500">{errors.customerName.message}</p>
-          )}
+          {errors.customerName && <p className="text-xs mt-1 text-red-500">{errors.customerName.message}</p>}
         </div>
 
-        {/* Email */}
         <div>
-          <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>
-            Email Address
-          </label>
+          <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>Email Address</label>
           <input
             {...register('customerEmail')}
             type="email"
@@ -92,16 +84,11 @@ export default function CustomerStep() {
             className="w-full px-4 py-3 rounded-xl border text-sm transition-all"
             style={{ borderColor: errors.customerEmail ? '#f87171' : 'rgba(199,233,192,0.8)', background: 'white' }}
           />
-          {errors.customerEmail && (
-            <p className="text-xs mt-1 text-red-500">{errors.customerEmail.message}</p>
-          )}
+          {errors.customerEmail && <p className="text-xs mt-1 text-red-500">{errors.customerEmail.message}</p>}
         </div>
 
-        {/* Phone */}
         <div>
-          <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>
-            Phone Number
-          </label>
+          <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--spa-dark)' }}>Phone Number</label>
           <input
             {...register('customerPhone')}
             type="tel"
@@ -109,9 +96,7 @@ export default function CustomerStep() {
             className="w-full px-4 py-3 rounded-xl border text-sm transition-all"
             style={{ borderColor: errors.customerPhone ? '#f87171' : 'rgba(199,233,192,0.8)', background: 'white' }}
           />
-          {errors.customerPhone && (
-            <p className="text-xs mt-1 text-red-500">{errors.customerPhone.message}</p>
-          )}
+          {errors.customerPhone && <p className="text-xs mt-1 text-red-500">{errors.customerPhone.message}</p>}
         </div>
 
         <div className="flex gap-3 pt-2">

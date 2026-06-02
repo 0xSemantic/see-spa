@@ -22,21 +22,21 @@ export default function BookingTable({ bookings, loading }) {
 
   return (
     <div>
-      {/* Filters */}
-      <div className="flex flex-wrap gap-3 mb-6">
+      {/* Filters - stack on mobile */}
+      <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search name, email, or receipt code..."
-          className="flex-1 min-w-48 px-4 py-2.5 rounded-xl border text-sm"
+          className="w-full sm:flex-1 px-4 py-2.5 rounded-xl border text-sm"
           style={{ borderColor: 'rgba(199,233,192,0.8)', background: 'white' }}
         />
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {['all', 'confirmed', 'checked_in'].map((s) => (
             <button
               key={s}
               onClick={() => setStatusFilter(s)}
-              className="px-4 py-2.5 rounded-xl text-sm font-medium transition-all"
+              className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all"
               style={{
                 background: statusFilter === s ? 'var(--spa-dark)' : 'white',
                 color: statusFilter === s ? 'white' : 'var(--spa-muted)',
@@ -57,12 +57,13 @@ export default function BookingTable({ bookings, loading }) {
           <p style={{ color: 'var(--spa-muted)' }}>No bookings found</p>
         </div>
       ) : (
+        // Horizontal scroll on mobile, normal on desktop
         <div className="overflow-x-auto rounded-2xl border" style={{ borderColor: 'rgba(199,233,192,0.5)' }}>
-          <table className="w-full text-sm">
+          <table className="min-w-[700px] sm:min-w-full w-full text-sm">
             <thead>
               <tr style={{ background: 'var(--spa-green)' }}>
                 {['Receipt', 'Guest', 'Service', 'Date & Time', 'Payment', 'Status'].map((h) => (
-                  <th key={h} className="text-left px-4 py-3 font-semibold text-xs uppercase tracking-wider" style={{ color: 'var(--spa-muted)' }}>
+                  <th key={h} className="text-left px-3 sm:px-4 py-3 font-semibold text-xs uppercase tracking-wider" style={{ color: 'var(--spa-muted)' }}>
                     {h}
                   </th>
                 ))}
@@ -80,30 +81,30 @@ export default function BookingTable({ bookings, loading }) {
                     className="border-t hover:bg-gray-50 transition-colors"
                     style={{ borderColor: 'rgba(199,233,192,0.3)' }}
                   >
-                    <td className="px-4 py-3">
-                      <span className="receipt-code text-xs font-semibold px-2 py-1 rounded-lg"
+                    <td className="px-3 sm:px-4 py-3">
+                      <span className="receipt-code text-xs font-semibold px-2 py-1 rounded-lg whitespace-nowrap"
                         style={{ background: 'var(--spa-yellow)', color: 'var(--spa-dark)' }}>
                         {b.receiptCode}
                       </span>
-                    </td>
-                    <td className="px-4 py-3">
+                     </td>
+                    <td className="px-3 sm:px-4 py-3">
                       <div className="font-medium" style={{ color: 'var(--spa-dark)' }}>{b.customerName}</div>
-                      <div className="text-xs" style={{ color: 'var(--spa-muted)' }}>{b.customerEmail}</div>
-                    </td>
-                    <td className="px-4 py-3 font-medium" style={{ color: 'var(--spa-text)' }}>{b.service}</td>
-                    <td className="px-4 py-3">
+                      <div className="text-xs break-all" style={{ color: 'var(--spa-muted)' }}>{b.customerEmail}</div>
+                     </td>
+                    <td className="px-3 sm:px-4 py-3 font-medium whitespace-nowrap" style={{ color: 'var(--spa-text)' }}>{b.service}</td>
+                    <td className="px-3 sm:px-4 py-3 whitespace-nowrap">
                       <div style={{ color: 'var(--spa-text)' }}>{formatDisplayDate(b.date)}</div>
                       <div className="text-xs" style={{ color: 'var(--spa-muted)' }}>{formatTime(b.timeSlot)}</div>
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs" style={{ color: 'var(--spa-muted)' }}>
+                     </td>
+                    <td className="px-3 sm:px-4 py-3 font-mono text-xs whitespace-nowrap" style={{ color: 'var(--spa-muted)' }}>
                       **** {b.paymentLast4}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className="px-2.5 py-1 rounded-full text-xs font-semibold"
+                     </td>
+                    <td className="px-3 sm:px-4 py-3">
+                      <span className="px-2.5 py-1 rounded-full text-xs font-semibold whitespace-nowrap"
                         style={{ background: s.bg, color: s.color }}>
                         {s.label}
                       </span>
-                    </td>
+                     </td>
                   </motion.tr>
                 );
               })}

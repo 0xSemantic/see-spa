@@ -53,7 +53,6 @@ export default function ServiceStep() {
     setSelectedDate(date);
     setSelectedTime('');
     if (date && selectedService) {
-      // Pre-check all slots
       const results = await Promise.all(
         TIME_SLOTS.map(async (slot) => {
           const available = await checkSlot(selectedService, date, slot);
@@ -99,22 +98,22 @@ export default function ServiceStep() {
       exit={{ opacity: 0, x: -30 }}
       transition={{ duration: 0.35 }}
     >
-      <h2 className="font-display text-3xl font-semibold mb-2" style={{ color: 'var(--spa-dark)' }}>
+      <h2 className="font-display text-2xl sm:text-3xl font-semibold mb-2" style={{ color: 'var(--spa-dark)' }}>
         Choose Your Treatment
       </h2>
-      <p className="text-sm mb-8" style={{ color: 'var(--spa-muted)' }}>
+      <p className="text-sm mb-6 sm:mb-8" style={{ color: 'var(--spa-muted)' }}>
         Select a service, date, and your preferred time
       </p>
 
-      {/* Services */}
-      <div className="grid grid-cols-2 gap-4 mb-8">
+      {/* Services - responsive grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         {SERVICES.map((svc) => (
           <motion.button
             key={svc.id}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleServiceChange(svc.id)}
-            className="text-left p-5 rounded-2xl border-2 transition-all duration-200"
+            className="text-left p-4 sm:p-5 rounded-2xl border-2 transition-all duration-200"
             style={{
               borderColor: selectedService === svc.id ? 'var(--spa-dark)' : 'rgba(199,233,192,0.6)',
               background: selectedService === svc.id ? 'var(--spa-green)' : 'white',
@@ -164,7 +163,7 @@ export default function ServiceStep() {
           <label className="block text-sm font-medium mb-3" style={{ color: 'var(--spa-dark)' }}>
             Available Times
           </label>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {TIME_SLOTS.map((slot) => {
               const isUnavailable = unavailableSlots.includes(slot);
               const isSelected = selectedTime === slot;

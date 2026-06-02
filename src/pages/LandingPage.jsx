@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
-/* ─── data ─────────────────────────────────────────────── */
+/* ─── data (unchanged) ─────────────────────────────────── */
 const SERVICES = [
   {
     id: 'medicure',
@@ -114,25 +114,109 @@ export default function LandingPage() {
     return () => clearInterval(t);
   }, []);
 
-  /* stagger children */
   const container = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
   const item = { hidden: { opacity: 0, y: 32 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } };
 
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", color: '#2c3e2d', overflowX: 'hidden' }}>
+      {/* Mobile responsive overrides */}
+      <style>{`
+        @media (max-width: 768px) {
+        .landing-desktop-nav {
+            display: none !important;
+        }
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .hero-right-stack {
+            display: none !important;
+          }
+          .process-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+          }
+          .trust-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .service-panel {
+            grid-template-columns: 1fr !important;
+          }
+          .service-left, .service-right {
+            padding: 2rem !important;
+          }
+          .service-left h3 {
+            font-size: 2rem !important;
+          }
+          .service-left .price {
+            font-size: 1.5rem !important;
+          }
+          .nav-links {
+            gap: 1rem !important;
+          }
+          .nav-links a, .nav-links .book-btn {
+            font-size: 0.75rem !important;
+            padding: 0.5rem 0.8rem !important;
+          }
+          .hero-badge {
+            font-size: 0.7rem !important;
+            padding: 0.25rem 0.8rem !important;
+          }
+          .hero-stats {
+            flex-wrap: wrap;
+            gap: 1.5rem !important;
+          }
+          .cta-buttons {
+            flex-direction: column;
+            align-items: stretch;
+          }
+          .cta-buttons a, .cta-buttons button {
+            width: 100%;
+            text-align: center;
+          }
+          .section-padding {
+            padding: 3rem 1.5rem !important;
+          }
+          .service-tabs {
+            gap: 0.5rem !important;
+          }
+          .service-tabs button {
+            padding: 0.5rem 1rem !important;
+            font-size: 0.75rem !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero h1 {
+            font-size: 2.5rem !important;
+          }
+          .hero p {
+            font-size: 0.9rem !important;
+          }
+          .receipt-code-example {
+            font-size: 0.8rem !important;
+          }
+        }
+      `}</style>
 
-      {/* ══════════ NAV ══════════ */}
+      {/* ══════════ NAV (responsive) ══════════ */}
       <motion.nav
+        className="landing-desktop-nav"
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         style={{
-          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-          background: 'rgba(250,253,248,0.82)', backdropFilter: 'blur(16px)',
-          borderBottom: '1px solid rgba(199,233,192,0.4)',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 100,
+            background: 'rgba(250,253,248,0.82)',
+            backdropFilter: 'blur(16px)',
+            borderBottom: '1px solid rgba(199,233,192,0.4)',
         }}
-      >
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        >
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 1rem', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#3d5a3e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>🌿</div>
             <div>
@@ -140,20 +224,17 @@ export default function LandingPage() {
               <div style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#7a9e7b', lineHeight: 1.3 }}>Wellness & Beauty</div>
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
+          <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
             <a href="#services" style={{ fontSize: 13, fontWeight: 500, color: '#7a9e7b', textDecoration: 'none' }}>Services</a>
             <a href="#how-it-works" style={{ fontSize: 13, fontWeight: 500, color: '#7a9e7b', textDecoration: 'none' }}>How It Works</a>
             <a href="#testimonials" style={{ fontSize: 13, fontWeight: 500, color: '#7a9e7b', textDecoration: 'none' }}>Reviews</a>
             <Link to="/admin" style={{ fontSize: 13, fontWeight: 500, color: '#7a9e7b', textDecoration: 'none' }}>Staff</Link>
-            <Link to="/book" style={{
+            <Link to="/book" className="book-btn" style={{
               fontSize: 13, fontWeight: 600, padding: '10px 22px', borderRadius: 50,
               background: '#3d5a3e', color: 'white', textDecoration: 'none',
               transition: 'transform 0.2s, box-shadow 0.2s',
               boxShadow: '0 4px 16px rgba(61,90,62,0.25)',
-            }}
-              onMouseEnter={e => { e.target.style.transform = 'scale(1.04)'; e.target.style.boxShadow = '0 6px 24px rgba(61,90,62,0.35)'; }}
-              onMouseLeave={e => { e.target.style.transform = 'scale(1)'; e.target.style.boxShadow = '0 4px 16px rgba(61,90,62,0.25)'; }}
-            >
+            }}>
               Book Now
             </Link>
           </div>
@@ -162,25 +243,21 @@ export default function LandingPage() {
 
       {/* ══════════ HERO ══════════ */}
       <section ref={heroRef} style={{ minHeight: '100vh', position: 'relative', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: 68 }}>
-
-        {/* layered background */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #f0faf0 0%, #fef9e7 40%, #e8f5e9 100%)', zIndex: 0 }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 75% 40%, rgba(199,233,192,0.5) 0%, transparent 55%), radial-gradient(circle at 20% 70%, rgba(254,247,210,0.6) 0%, transparent 50%)', zIndex: 1 }} />
 
-        {/* decorative leaves */}
-        <Leaf style={{ position: 'absolute', top: '8%', right: '6%', width: 180, color: '#3d5a3e', transform: 'rotate(25deg)', zIndex: 1 }} />
-        <Leaf style={{ position: 'absolute', bottom: '12%', left: '3%', width: 120, color: '#3d5a3e', transform: 'rotate(-40deg)', zIndex: 1 }} />
-        <Leaf style={{ position: 'absolute', top: '40%', right: '18%', width: 80, color: '#a5d6a7', transform: 'rotate(60deg)', zIndex: 1 }} />
+        <Leaf style={{ position: 'absolute', top: '8%', right: '6%', width: 120, color: '#3d5a3e', transform: 'rotate(25deg)', zIndex: 1 }} />
+        <Leaf style={{ position: 'absolute', bottom: '12%', left: '3%', width: 80, color: '#3d5a3e', transform: 'rotate(-40deg)', zIndex: 1 }} />
+        <Leaf style={{ position: 'absolute', top: '40%', right: '18%', width: 60, color: '#a5d6a7', transform: 'rotate(60deg)', zIndex: 1 }} />
 
         <motion.div
-          style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 32px', position: 'relative', zIndex: 2, y: heroY, opacity: heroOpacity }}
+          style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 1.5rem', position: 'relative', zIndex: 2, y: heroY, opacity: heroOpacity }}
         >
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }}>
-
+          <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }}>
             {/* left copy */}
             <motion.div variants={container} initial="hidden" animate="show">
               <motion.div variants={item}>
-                <span style={{
+                <span className="hero-badge" style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 12,
                   fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase',
                   padding: '7px 16px', borderRadius: 50,
@@ -207,33 +284,26 @@ export default function LandingPage() {
                 From restorative medicures to radiance-boosting facials, our expert therapists deliver bespoke treatments in a sanctuary designed for complete calm. Book in minutes, arrive and exhale.
               </motion.p>
 
-              <motion.div variants={item} style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+              <motion.div variants={item} className="cta-buttons" style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
                 <Link to="/book" style={{
                   padding: '16px 36px', borderRadius: 50, background: '#3d5a3e',
                   color: 'white', textDecoration: 'none', fontSize: 15, fontWeight: 600,
                   boxShadow: '0 8px 32px rgba(61,90,62,0.3)',
                   transition: 'transform 0.2s, box-shadow 0.2s',
                   display: 'inline-flex', alignItems: 'center', gap: 10,
-                }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.04)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(61,90,62,0.4)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(61,90,62,0.3)'; }}
-                >
+                }}>
                   Reserve Your Session <span style={{ fontSize: 18 }}>→</span>
                 </Link>
                 <a href="#services" style={{
                   padding: '16px 28px', borderRadius: 50, border: '1.5px solid rgba(61,90,62,0.25)',
                   color: '#3d5a3e', textDecoration: 'none', fontSize: 15, fontWeight: 500,
                   transition: 'background 0.2s',
-                }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(199,233,192,0.4)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
-                >
+                }}>
                   Explore Services
                 </a>
               </motion.div>
 
-              {/* mini stats */}
-              <motion.div variants={item} style={{ display: 'flex', gap: 40, marginTop: 52 }}>
+              <motion.div className="hero-stats" variants={item} style={{ display: 'flex', gap: 40, marginTop: 52 }}>
                 {[
                   { n: 2400, s: '+', label: 'Happy Guests' },
                   { n: 4, s: '', label: 'Signature Treatments' },
@@ -249,102 +319,102 @@ export default function LandingPage() {
               </motion.div>
             </motion.div>
 
-            {/* right: visual card stack */}
-            <motion.div
-              initial={{ opacity: 0, x: 60 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              style={{ position: 'relative', height: 540 }}
-            >
-              {/* back card */}
+            {/* right: visual card stack (hidden on mobile) */}
+            <div className="hero-right-stack">
               <motion.div
-                animate={{ rotate: [-3, -2, -3], y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                style={{
-                  position: 'absolute', top: 40, right: -20, width: 300, height: 400,
-                  borderRadius: 28, background: '#c7e9c0',
-                  boxShadow: '0 20px 60px rgba(61,90,62,0.15)',
-                }}
-              />
-              {/* mid card */}
-              <motion.div
-                animate={{ rotate: [2, 3, 2], y: [0, 6, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                style={{
-                  position: 'absolute', top: 20, right: 10, width: 300, height: 400,
-                  borderRadius: 28, background: '#fae67c',
-                  boxShadow: '0 20px 60px rgba(61,90,62,0.12)',
-                }}
-              />
-              {/* main card */}
-              <motion.div
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                style={{
-                  position: 'absolute', top: 0, right: 30, width: 310, height: 420,
-                  borderRadius: 28, background: 'white',
-                  boxShadow: '0 30px 80px rgba(61,90,62,0.2)',
-                  padding: 32, display: 'flex', flexDirection: 'column', gap: 20,
-                }}
+                initial={{ opacity: 0, x: 60 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                style={{ position: 'relative', height: 540 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <div>
-                    <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#7a9e7b' }}>Today's Featured</div>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 600, color: '#2c3e2d', marginTop: 4 }}>Signature Facial</div>
-                  </div>
-                  <div style={{ fontSize: 36 }}>✨</div>
-                </div>
-                <div style={{ borderRadius: 18, background: '#e6f3e6', padding: '24px 20px', flex: 1 }}>
-                  <div style={{ fontSize: 13, color: '#5a7a5b', lineHeight: 1.7 }}>Deep cleansing · Vitamin C serum · Hydration mask · Pressure point massage</div>
-                  <div style={{ marginTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                {/* back card */}
+                <motion.div
+                  animate={{ rotate: [-3, -2, -3], y: [0, -8, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{
+                    position: 'absolute', top: 40, right: -20, width: 300, height: 400,
+                    borderRadius: 28, background: '#c7e9c0',
+                    boxShadow: '0 20px 60px rgba(61,90,62,0.15)',
+                  }}
+                />
+                {/* mid card */}
+                <motion.div
+                  animate={{ rotate: [2, 3, 2], y: [0, 6, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+                  style={{
+                    position: 'absolute', top: 20, right: 10, width: 300, height: 400,
+                    borderRadius: 28, background: '#fae67c',
+                    boxShadow: '0 20px 60px rgba(61,90,62,0.12)',
+                  }}
+                />
+                {/* main card */}
+                <motion.div
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                  style={{
+                    position: 'absolute', top: 0, right: 30, width: 310, height: 420,
+                    borderRadius: 28, background: 'white',
+                    boxShadow: '0 30px 80px rgba(61,90,62,0.2)',
+                    padding: 32, display: 'flex', flexDirection: 'column', gap: 20,
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <div>
-                      <div style={{ fontSize: 11, color: '#7a9e7b' }}>Duration</div>
-                      <div style={{ fontWeight: 600, color: '#3d5a3e' }}>75 minutes</div>
+                      <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#7a9e7b' }}>Today's Featured</div>
+                      <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 600, color: '#2c3e2d', marginTop: 4 }}>Signature Facial</div>
                     </div>
-                    <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: 11, color: '#7a9e7b' }}>From</div>
-                      <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, color: '#3d5a3e' }}>₦20k</div>
+                    <div style={{ fontSize: 36 }}>✨</div>
+                  </div>
+                  <div style={{ borderRadius: 18, background: '#e6f3e6', padding: '24px 20px', flex: 1 }}>
+                    <div style={{ fontSize: 13, color: '#5a7a5b', lineHeight: 1.7 }}>Deep cleansing · Vitamin C serum · Hydration mask · Pressure point massage</div>
+                    <div style={{ marginTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                      <div>
+                        <div style={{ fontSize: 11, color: '#7a9e7b' }}>Duration</div>
+                        <div style={{ fontWeight: 600, color: '#3d5a3e' }}>75 minutes</div>
+                      </div>
+                      <div style={{ textAlign: 'right' }}>
+                        <div style={{ fontSize: 11, color: '#7a9e7b' }}>From</div>
+                        <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, color: '#3d5a3e' }}>₦20k</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <div style={{ display: 'flex', gap: -4 }}>
-                    {['#c7e9c0','#fae67c','#f8c8d8'].map((c, i) => (
-                      <div key={i} style={{ width: 28, height: 28, borderRadius: '50%', background: c, border: '2px solid white', marginLeft: i > 0 ? -8 : 0 }} />
-                    ))}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display: 'flex', gap: -4 }}>
+                      {['#c7e9c0','#fae67c','#f8c8d8'].map((c, i) => (
+                        <div key={i} style={{ width: 28, height: 28, borderRadius: '50%', background: c, border: '2px solid white', marginLeft: i > 0 ? -8 : 0 }} />
+                      ))}
+                    </div>
+                    <div style={{ fontSize: 12, color: '#7a9e7b' }}>+2,400 guests served</div>
                   </div>
-                  <div style={{ fontSize: 12, color: '#7a9e7b' }}>+2,400 guests served</div>
-                </div>
+                </motion.div>
+                {/* floating badge */}
+                <motion.div
+                  animate={{ y: [0, -8, 0], rotate: [0, 2, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+                  style={{
+                    position: 'absolute', bottom: 80, left: 10, padding: '12px 20px',
+                    borderRadius: 16, background: '#3d5a3e', color: 'white',
+                    boxShadow: '0 12px 32px rgba(61,90,62,0.35)',
+                  }}
+                >
+                  <div style={{ fontSize: 11, opacity: 0.75 }}>Next available</div>
+                  <div style={{ fontSize: 14, fontWeight: 600 }}>Tomorrow · 10:00 AM</div>
+                </motion.div>
+                {/* receipt badge */}
+                <motion.div
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+                  style={{
+                    position: 'absolute', top: 60, left: -20, padding: '10px 16px',
+                    borderRadius: 12, background: '#fef7d2', border: '1px solid rgba(250,230,124,0.6)',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
+                  }}
+                >
+                  <div style={{ fontSize: 11, color: '#7a9e7b' }}>Receipt Code</div>
+                  <div className="receipt-code-example" style={{ fontSize: 15, fontWeight: 700, fontFamily: 'monospace', color: '#3d5a3e', letterSpacing: '0.1em' }}>SP-7K4M</div>
+                </motion.div>
               </motion.div>
-
-              {/* floating badge */}
-              <motion.div
-                animate={{ y: [0, -8, 0], rotate: [0, 2, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-                style={{
-                  position: 'absolute', bottom: 80, left: 10, padding: '12px 20px',
-                  borderRadius: 16, background: '#3d5a3e', color: 'white',
-                  boxShadow: '0 12px 32px rgba(61,90,62,0.35)',
-                }}
-              >
-                <div style={{ fontSize: 11, opacity: 0.75 }}>Next available</div>
-                <div style={{ fontSize: 14, fontWeight: 600 }}>Tomorrow · 10:00 AM</div>
-              </motion.div>
-
-              {/* receipt badge */}
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-                style={{
-                  position: 'absolute', top: 60, left: -20, padding: '10px 16px',
-                  borderRadius: 12, background: '#fef7d2', border: '1px solid rgba(250,230,124,0.6)',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
-                }}
-              >
-                <div style={{ fontSize: 11, color: '#7a9e7b' }}>Receipt Code</div>
-                <div style={{ fontSize: 15, fontWeight: 700, fontFamily: 'monospace', color: '#3d5a3e', letterSpacing: '0.1em' }}>SP-7K4M</div>
-              </motion.div>
-            </motion.div>
+            </div>
           </div>
         </motion.div>
 
@@ -360,7 +430,7 @@ export default function LandingPage() {
       </section>
 
       {/* ══════════ SERVICES ══════════ */}
-      <section id="services" style={{ padding: '120px 32px', background: 'white' }}>
+      <section id="services" className="section-padding" style={{ padding: '120px 1.5rem', background: 'white' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -378,8 +448,7 @@ export default function LandingPage() {
             </p>
           </motion.div>
 
-          {/* Service selector tabs */}
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginBottom: 48, flexWrap: 'wrap' }}>
+          <div className="service-tabs" style={{ display: 'flex', gap: 12, justifyContent: 'center', marginBottom: 48, flexWrap: 'wrap' }}>
             {SERVICES.map((s, i) => (
               <motion.button
                 key={s.id}
@@ -399,7 +468,6 @@ export default function LandingPage() {
             ))}
           </div>
 
-          {/* Active service panel */}
           <AnimatePresence mode="wait">
             <motion.div
               key={activeService}
@@ -407,13 +475,14 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
+              className="service-panel"
               style={{
                 borderRadius: 32, overflow: 'hidden', display: 'grid', gridTemplateColumns: '1fr 1fr',
                 boxShadow: '0 20px 80px rgba(61,90,62,0.12)',
               }}
             >
               {/* left: colored */}
-              <div style={{
+              <div className="service-left" style={{
                 background: SERVICES[activeService].color,
                 padding: '64px 56px',
                 display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
@@ -438,12 +507,12 @@ export default function LandingPage() {
                   <div style={{ width: 1, background: 'rgba(61,90,62,0.15)' }} />
                   <div>
                     <div style={{ fontSize: 11, color: '#7a9e7b', marginBottom: 4 }}>Price</div>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, color: '#3d5a3e', fontSize: 28 }}>{SERVICES[activeService].price}</div>
+                    <div className="price" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, color: '#3d5a3e', fontSize: 28 }}>{SERVICES[activeService].price}</div>
                   </div>
                 </div>
               </div>
-              {/* right: white with details */}
-              <div style={{ background: 'white', padding: '64px 56px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              {/* right: white */}
+              <div className="service-right" style={{ background: 'white', padding: '64px 56px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
                   <div style={{ fontSize: 13, fontWeight: 600, color: '#7a9e7b', marginBottom: 20, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                     What's included
@@ -472,11 +541,7 @@ export default function LandingPage() {
                   padding: '16px', borderRadius: 16, background: '#3d5a3e',
                   color: 'white', textDecoration: 'none', fontSize: 15, fontWeight: 600,
                   boxShadow: '0 8px 24px rgba(61,90,62,0.3)',
-                  transition: 'transform 0.2s',
-                }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.02)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
-                >
+                }}>
                   Book {SERVICES[activeService].name} →
                 </Link>
               </div>
@@ -486,7 +551,7 @@ export default function LandingPage() {
       </section>
 
       {/* ══════════ HOW IT WORKS ══════════ */}
-      <section id="how-it-works" style={{ padding: '120px 32px', background: '#f4fbf4' }}>
+      <section id="how-it-works" className="section-padding" style={{ padding: '120px 1.5rem', background: '#f4fbf4' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -501,7 +566,7 @@ export default function LandingPage() {
             </h2>
           </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+          <div className="process-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
             {PROCESS.map((p, i) => (
               <motion.div
                 key={p.step}
@@ -534,8 +599,8 @@ export default function LandingPage() {
       </section>
 
       {/* ══════════ TRUST STRIP ══════════ */}
-      <section style={{ padding: '72px 32px', background: '#3d5a3e' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 40 }}>
+      <section style={{ padding: '72px 1.5rem', background: '#3d5a3e' }}>
+        <div className="trust-grid" style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 40 }}>
           {[
             { icon: '🔒', title: 'Secure Booking', desc: 'Your data is encrypted. Your receipt code is unique and tamper-proof.' },
             { icon: '📧', title: 'Instant Receipt', desc: 'A confirmation email lands in your inbox the moment you book.' },
@@ -559,7 +624,7 @@ export default function LandingPage() {
       </section>
 
       {/* ══════════ TESTIMONIALS ══════════ */}
-      <section id="testimonials" style={{ padding: '120px 32px', background: 'white' }}>
+      <section id="testimonials" className="section-padding" style={{ padding: '120px 1.5rem', background: 'white' }}>
         <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -598,7 +663,6 @@ export default function LandingPage() {
             </AnimatePresence>
           </div>
 
-          {/* dots */}
           <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginTop: 40 }}>
             {TESTIMONIALS.map((_, i) => (
               <button
@@ -616,7 +680,7 @@ export default function LandingPage() {
       </section>
 
       {/* ══════════ CTA SECTION ══════════ */}
-      <section style={{ padding: '100px 32px' }}>
+      <section style={{ padding: '100px 1.5rem' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
@@ -624,15 +688,15 @@ export default function LandingPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
             style={{
-              borderRadius: 40, padding: '80px 64px', textAlign: 'center',
+              borderRadius: 40, padding: 'clamp(2rem, 8vw, 5rem) 1.5rem', textAlign: 'center',
               background: 'linear-gradient(135deg, #e6f3e6 0%, #fef7d2 60%, #c7e9c0 100%)',
               position: 'relative', overflow: 'hidden',
               border: '1px solid rgba(199,233,192,0.6)',
               boxShadow: '0 20px 80px rgba(61,90,62,0.1)',
             }}
           >
-            <Leaf style={{ position: 'absolute', top: -20, right: -20, width: 200, color: '#3d5a3e', transform: 'rotate(20deg)' }} />
-            <Leaf style={{ position: 'absolute', bottom: -30, left: -10, width: 140, color: '#3d5a3e', transform: 'rotate(-30deg)' }} />
+            <Leaf style={{ position: 'absolute', top: -20, right: -20, width: 140, color: '#3d5a3e', transform: 'rotate(20deg)' }} />
+            <Leaf style={{ position: 'absolute', bottom: -30, left: -10, width: 100, color: '#3d5a3e', transform: 'rotate(-30deg)' }} />
 
             <div style={{ position: 'relative', zIndex: 1 }}>
               <div style={{ fontSize: 48, marginBottom: 20 }}>🌿</div>
@@ -642,26 +706,20 @@ export default function LandingPage() {
               <p style={{ fontSize: 16, color: '#5a7a5b', lineHeight: 1.8, marginBottom: 44, maxWidth: 480, margin: '0 auto 44px' }}>
                 Join thousands of guests who've made Serene Spa part of their self-care routine. Your first step is just a few clicks away.
               </p>
-              <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <div className="cta-buttons" style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
                 <Link to="/book" style={{
                   padding: '18px 44px', borderRadius: 50, background: '#3d5a3e',
                   color: 'white', textDecoration: 'none', fontSize: 16, fontWeight: 600,
                   boxShadow: '0 10px 36px rgba(61,90,62,0.35)',
                   transition: 'all 0.2s', display: 'inline-block',
-                }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.04)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
-                >
+                }}>
                   Book Your Treatment
                 </Link>
                 <a href="#services" style={{
                   padding: '18px 36px', borderRadius: 50, border: '1.5px solid rgba(61,90,62,0.3)',
                   color: '#3d5a3e', textDecoration: 'none', fontSize: 16, fontWeight: 500,
                   transition: 'background 0.2s', display: 'inline-block',
-                }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(61,90,62,0.07)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
-                >
+                }}>
                   View All Services
                 </a>
               </div>
@@ -669,7 +727,6 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
-
     </div>
   );
 }

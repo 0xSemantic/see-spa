@@ -1,8 +1,21 @@
 export default function Footer() {
   return (
-    <footer style={{ background: '#2c3e2d', padding: '60px 32px 40px', color: 'rgba(199,233,192,0.7)' }}>
+    <footer style={{ background: '#2c3e2d', padding: '60px 1.5rem 40px', color: 'rgba(199,233,192,0.7)' }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .footer-bottom {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+            text-align: center;
+          }
+        }
+      `}</style>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
+        <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
               <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(199,233,192,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>🌿</div>
@@ -35,7 +48,7 @@ export default function Footer() {
             </div>
           ))}
         </div>
-        <div style={{ borderTop: '1px solid rgba(199,233,192,0.1)', paddingTop: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12 }}>
+        <div className="footer-bottom" style={{ borderTop: '1px solid rgba(199,233,192,0.1)', paddingTop: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12 }}>
           <span>© {new Date().getFullYear()} Serene Spa. All rights reserved.</span>
           <span style={{ opacity: 0.5 }}>Full system — test cards: 4111... · 5555... · 3782...</span>
         </div>
