@@ -1,4 +1,4 @@
-# 🌿 Serene Spa Booking System
+# 🌿 Glamour Spa Booking System
 
 Full-stack-free spa booking app with Firebase, EmailJS, dummy payments & admin portal.
 
