@@ -12,7 +12,7 @@ const SERVICES = [
     title: 'Medicure',
     desc: 'Medical-grade foot & skin care treatment',
     duration: '60 min',
-    price: '₦15,000',
+    price: '$150',
   },
   {
     id: 'Manicure',
@@ -20,7 +20,7 @@ const SERVICES = [
     title: 'Manicure',
     desc: 'Luxurious nail care and polish service',
     duration: '45 min',
-    price: '₦10,000',
+    price: '$100',
   },
   {
     id: 'Pedicure',
@@ -28,7 +28,7 @@ const SERVICES = [
     title: 'Pedicure',
     desc: 'Rejuvenating foot soak and nail treatment',
     duration: '50 min',
-    price: '₦12,000',
+    price: '$120',
   },
   {
     id: 'Facial',
@@ -36,7 +36,7 @@ const SERVICES = [
     title: 'Facial',
     desc: 'Deep cleansing and hydrating facial therapy',
     duration: '75 min',
-    price: '₦20,000',
+    price: '$200',
   },
 ];
 

@@ -50,10 +50,10 @@ export default function PaymentStep() {
   };
 
   const SERVICE_PRICES = {
-    Medicure: '₦15,000',
-    Manicure: '₦10,000',
-    Pedicure: '₦12,000',
-    Facial: '₦20,000',
+    Medicure: '$150',
+    Manicure: '$100',
+    Pedicure: '$120',
+    Facial: '$200',
   };
 
   return (

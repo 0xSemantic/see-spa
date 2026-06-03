@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
-/* ─── data (unchanged) ─────────────────────────────────── */
+/* ─── data (updated) ─────────────────────────────────── */
 const SERVICES = [
   {
     id: 'medicure',
@@ -10,7 +10,7 @@ const SERVICES = [
     name: 'Medicure',
     tagline: 'Medical-grade care',
     desc: "Therapeutic treatment targeting calluses, cracked heels, and nail conditions. Our certified therapists use clinical-grade tools for results that go beyond cosmetic.",
-    price: '₦15,000',
+    price: '$150',
     duration: '60 min',
     color: '#e8f5e9',
     accent: '#4caf50',
@@ -21,7 +21,7 @@ const SERVICES = [
     name: 'Manicure',
     tagline: 'Polished perfection',
     desc: "From cuticle care to a high-gloss finish, every detail tended to. Choose from a curated palette of premium lacquers or go for a natural buff shine.",
-    price: '₦10,000',
+    price: '$100',
     duration: '45 min',
     color: '#fff8e1',
     accent: '#f9a825',
@@ -32,7 +32,7 @@ const SERVICES = [
     name: 'Pedicure',
     tagline: 'From sole to soul',
     desc: "A warm herbal soak, exfoliating scrub, pressure-point massage, and immaculate nail finish. Your feet carry you everywhere, let us carry them for an hour.",
-    price: '₦12,000',
+    price: '$120',
     duration: '50 min',
     color: '#e3f2fd',
     accent: '#1e88e5',
@@ -43,7 +43,7 @@ const SERVICES = [
     name: 'Facial',
     tagline: 'Skin, reimagined',
     desc: "Deep pore cleansing, vitamin-infused serums, and a customised hydration protocol. Your skin's specific needs guide every step of this transformative treatment.",
-    price: '₦20,000',
+    price: '$200',
     duration: '75 min',
     color: '#fce4ec',
     accent: '#e91e63',
@@ -51,9 +51,9 @@ const SERVICES = [
 ];
 
 const TESTIMONIALS = [
-  { name: 'Adaeze O.', role: 'Lagos', quote: "I've been to many spas but Serene is on another level. The medicure treatment cleared up years of stubborn calluses in one session. I left floating.", stars: 5 },
-  { name: 'Tolu B.', role: 'Abuja', quote: "Booked online in under 3 minutes, showed my receipt code at the door, and within minutes I was in a chair. Seamless, beautiful, worth every naira.", stars: 5 },
-  { name: 'Chisom N.', role: 'Port Harcourt', quote: "The facial changed my skincare life. The therapist knew exactly what my skin needed. The glow lasted two weeks. I'm already booked for next month.", stars: 5 },
+  { name: 'Adaeze O.', role: 'Dubai', quote: "I've been to many spas but Glamour Spa is on another level. The medicure treatment cleared up years of stubborn calluses in one session. I left floating.", stars: 5 },
+  { name: 'Tolu B.', role: 'Paris', quote: "Booked online in under 3 minutes, showed my receipt code at the door, and within minutes I was in a chair. Seamless, beautiful, worth every dollar.", stars: 5 },
+  { name: 'Chisom N.', role: 'Marrakech', quote: "The facial changed my skincare life. The therapist knew exactly what my skin needed. The glow lasted two weeks. I'm already booked for next month.", stars: 5 },
 ];
 
 const PROCESS = [
@@ -220,7 +220,7 @@ export default function LandingPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#3d5a3e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>🌿</div>
             <div>
-              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600, fontSize: 18, lineHeight: 1, color: '#3d5a3e' }}>Serene Spa</div>
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600, fontSize: 18, lineHeight: 1, color: '#3d5a3e' }}>Glamour Spa</div>
               <div style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#7a9e7b', lineHeight: 1.3 }}>Wellness & Beauty</div>
             </div>
           </div>
@@ -264,7 +264,7 @@ export default function LandingPage() {
                   background: 'rgba(199,233,192,0.6)', color: '#3d5a3e',
                   border: '1px solid rgba(61,90,62,0.15)', marginBottom: 28,
                 }}>
-                  <span>🌿</span> Lagos's Premier Spa Experience
+                  <span>🌿</span> Dubai's Premier Spa Experience
                 </span>
               </motion.div>
 
@@ -374,7 +374,7 @@ export default function LandingPage() {
                       </div>
                       <div style={{ textAlign: 'right' }}>
                         <div style={{ fontSize: 11, color: '#7a9e7b' }}>From</div>
-                        <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, color: '#3d5a3e' }}>₦20k</div>
+                        <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, color: '#3d5a3e' }}>$200</div>
                       </div>
                     </div>
                   </div>
@@ -704,7 +704,7 @@ export default function LandingPage() {
                 Your Sanctuary<br /><em>Awaits You</em>
               </h2>
               <p style={{ fontSize: 16, color: '#5a7a5b', lineHeight: 1.8, marginBottom: 44, maxWidth: 480, margin: '0 auto 44px' }}>
-                Join thousands of guests who've made Serene Spa part of their self-care routine. Your first step is just a few clicks away.
+                Join thousands of guests who've made Glamour Spa part of their self-care routine. Your first step is just a few clicks away.
               </p>
               <div className="cta-buttons" style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
                 <Link to="/book" style={{

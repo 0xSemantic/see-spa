@@ -20,7 +20,7 @@ export default function Footer() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
               <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(199,233,192,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>🌿</div>
               <div>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600, fontSize: 18, color: '#c7e9c0' }}>Serene Spa</div>
+                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600, fontSize: 18, color: '#c7e9c0' }}>Glamour Spa</div>
                 <div style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0.6 }}>Wellness & Beauty</div>
               </div>
             </div>
@@ -49,7 +49,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="footer-bottom" style={{ borderTop: '1px solid rgba(199,233,192,0.1)', paddingTop: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12 }}>
-          <span>© {new Date().getFullYear()} Serene Spa. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Glamour Spa. All rights reserved.</span>
           <span style={{ opacity: 0.5 }}>Full system — test cards: 4111... · 5555... · 3782...</span>
         </div>
       </div>

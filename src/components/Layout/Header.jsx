@@ -45,7 +45,7 @@ export default function Header() {
           </div>
           <div className="brand-text">
             <div className="font-display text-xl font-semibold leading-none" style={{ color: 'var(--spa-dark)' }}>
-              Serene Spa
+              Glamour Spa
             </div>
             <div className="text-xs tracking-widest uppercase" style={{ color: 'var(--spa-muted)' }}>
               Wellness & Beauty
